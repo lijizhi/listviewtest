@@ -1,2 +1,7 @@
 # listviewtest
-ListView的优化
+ListView绝对称得上是Android中最常用的控件之一，几乎所有的应用程序都会用到它。
+主要有两层优化方法：
+
+*   判断getView的参数convertView是否为空，，如果convertView为null，则使用LayoutInflater去加载布局，如果不为null则直接对convertView进行重用。
+
+*   新增一个内部类ViewHolder，用于对控件的实例进行缓存。当convertView为null的时候，创建一个ViewHolder对象，并将控件的实例都存放在ViewHolder里，然后调用View的setTag()方法，将ViewHolder对象存储在view中。当convertView不为null的时候，则调用View的getTag()方法，把ViewHolder重新取出。这样所有的控件实例都缓存在了ViewHolder里，就没有必有每次都通过findViewById()方法来获取控件实例了。
